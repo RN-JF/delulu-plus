@@ -1,0 +1,108 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "delulu-plus"
+version = "0.3.0"
+description = "Python chatbot with advanced character management, seamless animations, and multi-AI provider support"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [
+    {name = "RN-JF"},
+]
+maintainers = [
+    {name = "RN-JF"},
+]
+keywords = ["chatbot", "ai", "character", "gui", "pyside6", "openai", "anthropic", "animations", "chat-tree", "local-storage"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Communications :: Chat", 
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Environment :: X11 Applications :: Qt",
+]
+
+# Core dependencies - Updated based on actual project structure
+dependencies = [
+    "PySide6>=6.4.0,<7.0.0",
+    "requests>=2.31.0,<3.0.0",
+    "Pillow>=9.0.0,<11.0.0",
+    "aiohttp>=3.8.0,<4.0.0",
+]
+
+
+# Entry points for command-line usage
+[project.scripts]
+delulu-plus = "src.__main__:main"
+delulu = "src.__main__:main"
+
+# Project URLs
+[project.urls]
+Homepage = "https://github.com/RN-JF/delulu-plus"
+
+# Setuptools configuration - Updated for current structure
+[tool.setuptools]
+packages = [
+    "src", 
+    "src.models", 
+    "src.ui", 
+    "src.core", 
+    "src.utils"
+]
+package-dir = {"" = "."}
+
+[tool.setuptools.package-data]
+"src" = ["*.py", "assets/*"]
+"src.models" = ["*.py"] 
+"src.ui" = ["*.py"]
+"src.core" = ["*.py"]
+"src.utils" = ["*.py"]
+
+# Development tools configuration
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | data
+)/
+'''
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+exclude = [".git", "__pycache__", "build", "dist", ".eggs", "data"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
